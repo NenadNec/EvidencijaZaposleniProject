@@ -1,0 +1,13 @@
+<ng-container *ngIf="loggedIn">
+  <app-header></app-header>
+  <div class="row">
+    <div>
+      <br>
+      <br>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</ng-container>
+<ng-container *ngIf="!loggedIn">
+  <router-outlet></router-outlet>
+</ng-container>

@@ -1,0 +1,25 @@
+<table class="zaposleni">
+  <tr>
+    <th>#</th>
+    <th>Ime</th>
+    <th>Prezime</th>
+    <th>Grad</th>
+    <th>Šifra</th>
+    <th>Magacini</th>
+  </tr>
+  <tr *ngFor="let zaposleni of zaposleniList; let i = index">
+    <td>{{ i + 1 }}</td>
+    <td>{{ zaposleni.ime }}</td>
+    <td>{{ zaposleni.prezime }}</td>
+    <td>{{ zaposleni.grad }}</td>
+    <td>{{ zaposleni.sifra }}</td>
+    <td>
+      <ul *ngIf="zaposleni.magacini && zaposleni.magacini.$values.length > 0">
+        <li *ngFor="let magacin of zaposleni.magacini.$values">
+          {{ magacin.magacin.naziv }} <!-- Prikazujemo naziv magacina -->
+        </li>
+      </ul>
+    </td>
+  </tr>
+</table>
+<button (click)="openDialog()">Dodaj zaposlenog</button>

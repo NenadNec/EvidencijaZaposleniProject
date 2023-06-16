@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="select-wrapper">
+    <label for="zaposleni">Izaberi zaposlenog:</label>
+    <select id="zaposleni" [(ngModel)]="selectedZaposleni" (ngModelChange)="getKupci()">
+      <option *ngFor="let zaposleni of zaposleniList" [ngValue]="zaposleni.id">{{ zaposleni.ime }} {{ zaposleni.prezime }}</option>
+    </select>
+    <button class="green-button" (click)="openNoviKupacForm()">Dodaj novog kupca</button> 
+  </div>
+
+  <table class="kupci-table">
+    <thead>
+      <tr>
+        <th>Naziv</th>
+        <th>PIB</th>
+        <th>Šifra</th>
+        <th>Akcije</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let kupac of kupciList">
+        <td>{{ kupac.naziv }}</td>
+        <td>{{ kupac.pib }}</td>
+        <td>{{ kupac.sifra }}</td>
+        <td>
+          <button class="green-button" (click)="izmeniKupca(kupac)" [disabled]="!kupacIsValid(kupac) || selectedKupac">Izmeni</button>
+          <button class="red-button" (click)="obrisiKupcaDialog(kupac)" [disabled]="selectedKupac">Obriši</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+
+  <div *ngIf="selectedKupac" class="edit-kupac">
+    <h2>Izmeni kupca</h2>
+    <div class="form-group">
+      <label for="naziv">Naziv:</label>
+      <input type="text" id="naziv" class="form-control" [(ngModel)]="selectedKupac.naziv" required>
+      <div *ngIf="!selectedKupac.naziv" class="error-message">
+        Naziv je obavezno polje.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="pib">PIB:</label>
+      <input type="text" id="pib" class="form-control" [(ngModel)]="selectedKupac.pib" required>
+      <div *ngIf="!selectedKupac.pib" class="error-message">
+        PIB je obavezno polje.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="sifra">Šifra:</label>
+      <input type="text" id="sifra" class="form-control" [(ngModel)]="selectedKupac.sifra" required>
+      <div *ngIf="!selectedKupac.sifra" class="error-message">
+        Šifra je obavezno polje.
+      </div>
+    </div>
+    <button class="btn btn-success" (click)="sacuvajIzmene()" [disabled]="!selectedKupacIsValid()">Sačuvaj izmene</button>
+    <button class="blue-button odustani" (click)="odustani()">Odustani</button> <!-- Dodato dugme "Odustani" -->
+  </div>
+
+<!-- Dijalog za validaciju kupaca-->
+<div class="dialog-overlay" *ngIf="showDialog">
+  <div class="dialog-box">
+    <h3>Da li ste sigurni da želite da izbrišete kupca?</h3>
+    <div class="dialog-buttons">
+      <button class="confirm-button" (click)="potvrdiBrisanje(kupac)">Potvrdi</button>
+      <button class="cancel-button" (click)="otkaziBrisanje()">Otkaži</button>
+    </div>
+  </div>
+</div>
+
+
+
+  <div class="toast-container">
+    <div *ngIf="successMessage" class="toast-item success">
+      <span class="toast-message">{{ successMessage }}</span>
+      <span class="toast-close-button" (click)="clearToastr()">&times;</span>
+    </div>
+    <div *ngIf="errorMessage" class="toast-item error">
+      <span class="toast-message">{{ errorMessage }}</span>
+      <span class="toast-close-button" (click)="clearToastr()">&times;</span>
+    </div>
+  </div>
+
+  
+  
+</div>

@@ -1,0 +1,38 @@
+<h2>Registracija</h2>
+<form (ngSubmit)="submitForm()" #registracijaForma="ngForm">
+  <div>
+    <label for="ime">Ime:</label>
+    <input type="text" id="ime" [(ngModel)]="registracijaModel.ime" name="ime" required #ime="ngModel">
+    <div *ngIf="ime.invalid && (ime.dirty || ime.touched)" class="error-message">
+      Ime je obavezno polje.
+    </div>
+  </div>
+  <div>
+    <label for="user">Korisničko ime:</label>
+    <input type="text" id="user" [(ngModel)]="registracijaModel.user" name="user" required #user="ngModel">
+    <div *ngIf="user.invalid && (user.dirty || user.touched)" class="error-message">
+      Korisničko ime je obavezno polje.
+    </div>
+  </div>
+  <div>
+    <label for="password">Lozinka:</label>
+    <input type="password" id="password" [(ngModel)]="registracijaModel.password" name="password" required #password="ngModel">
+    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error-message">
+      Lozinka je obavezno polje.
+    </div>
+  </div>
+  <button type="submit" [disabled]="registracijaForma.invalid">Registruj se</button>
+</form>
+
+<div class="toast-container">
+  <div *ngIf="successMessage" class="toast-item success">
+    <span class="toast-message">{{ successMessage }}</span>
+    <span class="toast-close-button" (click)="clearToastr()">&times;</span>
+  </div>
+  <div *ngIf="errorMessage" class="toast-item error">
+    <span class="toast-message">{{ errorMessage }}</span>
+    <span class="toast-close-button" (click)="clearToastr()">&times;</span>
+  </div>
+
+
+</div>

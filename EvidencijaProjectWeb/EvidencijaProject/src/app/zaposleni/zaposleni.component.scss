@@ -1,0 +1,49 @@
+table.zaposleni {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  background-color: #C7C1C0;
+
+  th {
+    background-color: #b3d9ff;
+    color: #333;
+    font-weight: bold;
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+
+  td {
+    background-color: #fff;
+    color: #555;
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+

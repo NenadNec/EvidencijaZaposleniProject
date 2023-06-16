@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="form-wrapper">
+    <button class="close-button" (click)="closeForm()">X</button>
+    <h2>Novi kupac</h2>
+
+    <form #noviKupacForm="ngForm" (ngSubmit)="submitForm()">
+      <div class="form-group">
+        <label for="naziv">Naziv:</label>
+        <input id="naziv" type="text" [(ngModel)]="noviKupac.naziv" name="naziv" required>
+        <div *ngIf="noviKupacForm.controls['naziv']?.touched && noviKupacForm.controls['naziv'].invalid" class="error-message">
+          Naziv je obavezno polje.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="pib">PIB:</label>
+        <input id="pib" type="text" [(ngModel)]="noviKupac['pib']" name="pib" required>
+        <div *ngIf="noviKupacForm.controls['pib']?.touched && noviKupacForm.controls['pib'].invalid" class="error-message">
+          PIB je obavezno polje.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="sifra">Šifra:</label>
+        <input id="sifra" type="text" [(ngModel)]="noviKupac['sifra']" name="sifra" required>
+        <div *ngIf="noviKupacForm.controls['sifra']?.touched && noviKupacForm.controls['sifra'].invalid" class="error-message">
+          Šifra je obavezno polje.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="zaposleni">Zaposleni:</label>
+        <select id="zaposleni" [(ngModel)]="noviKupac['zaposleniId']" name="zaposleni" required>
+          <option *ngFor="let zaposleni of zaposleniList" [value]="zaposleni.id">{{ zaposleni.ime }} {{ zaposleni.prezime }}</option>
+        </select>
+        <div *ngIf="noviKupacForm.controls['zaposleni']?.touched && noviKupacForm.controls['zaposleni']?.invalid" class="error-message">
+          Zaposleni je obavezno polje.
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="noviKupacForm.invalid || !noviKupacForm.controls['zaposleni']?.value">Dodaj kupca</button>
+    </form>
+
+
+    
+  <div class="toast-container">
+    <div *ngIf="successMessage" class="toast-item success">
+      <span class="toast-message">{{ successMessage }}</span>
+      <span class="toast-close-button" (click)="clearToastr()">&times;</span>
+    </div>
+    <div *ngIf="errorMessage" class="toast-item error">
+      <span class="toast-message">{{ errorMessage }}</span>
+      <span class="toast-close-button" (click)="clearToastr()">&times;</span>
+    </div>
+  </div>
+
+    
+  </div>
+</div>

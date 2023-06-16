@@ -1,0 +1,22 @@
+<div class="weather-forecast">
+  <h2>Vremenska prognoza</h2>
+
+  <div class="form-group">
+    <button (click)="getWeather()">Prikaži vremensku prognozu</button>
+  </div>
+
+  <div *ngIf="weatherData && weatherData.length > 0" class="weather-data">
+    <h3>{{ cityData?.name }}</h3>
+    <div *ngFor="let forecast of weatherData" class="forecast-item">
+      <p class="date">Datum: {{ forecast.dt_txt | date:'medium' }}</p> <!-- Promenjeno svojstvo Date u dt i dodato množenje sa 1000 i formatiranje date:'medium' -->
+      <p class="temperature">Temperatura: {{ forecast.main.temp }}°C</p> <!-- Promenjeno svojstvo TemperatureC u main.temp -->
+      <p class="summary">Opis: {{ forecast.weather[0].description }}</p> <!-- Promenjeno svojstvo Summary u weather[0].description -->
+      <hr class="divider">
+    </div>
+  </div>
+  <div *ngIf="weatherData && weatherData.length === 0" class="no-data">
+    <p>Trenutno nema dostupnih vremenskih podataka.</p>
+  </div>
+</div>
+<h3>PRIKAZ JSON FORMATA - nisaam razumeo da li treba Json ili obradjeni Json format(Pritisni dugme :D)</h3>
+<pre>{{ weatherData | json }}</pre>

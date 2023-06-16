@@ -1,0 +1,81 @@
+<mat-dialog-content class="dialog dialog-large">
+  <form (ngSubmit)="submitForm()" [formGroup]="zaposleniForm" class="form">
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>Ime:</mat-label>
+        <input matInput type="text" id="ime" formControlName="ime" required>
+      </mat-form-field>
+      <mat-error *ngIf="zaposleniForm.get('ime')?.invalid && (zaposleniForm.get('ime')?.dirty || zaposleniForm.get('ime')?.touched)" class="error-message">
+        Polje Ime je obavezno.
+      </mat-error>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>Prezime:</mat-label>
+        <input matInput type="text" id="prezime" formControlName="prezime" required>
+      </mat-form-field>
+      <mat-error *ngIf="zaposleniForm.get('prezime')?.invalid && (zaposleniForm.get('prezime')?.dirty || zaposleniForm.get('prezime')?.touched)" class="error-message">
+        Polje Prezime je obavezno.
+      </mat-error>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>Šifra:</mat-label>
+        <input matInput type="text" id="sifra" formControlName="sifra" required>
+      </mat-form-field>
+      <mat-error *ngIf="zaposleniForm.get('sifra')?.invalid && (zaposleniForm.get('sifra')?.dirty || zaposleniForm.get('sifra')?.touched)" class="error-message">
+        Polje Šifra je obavezno.
+      </mat-error>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>Grad:</mat-label>
+        <input matInput type="text" id="grad" formControlName="grad" required>
+      </mat-form-field>
+      <mat-error *ngIf="zaposleniForm.get('grad')?.invalid && (zaposleniForm.get('grad')?.dirty || zaposleniForm.get('grad')?.touched)" class="error-message">
+        Polje Grad je obavezno.
+      </mat-error>
+    </div>
+
+    <!-- <div class="magacini-container">
+      <mat-selection-list formArrayName="magacini" (selectionChange)="onSelectionChange($event)">
+        <mat-list-option *ngFor="let magacin of magaciniList; let i = index" [value]="magacin?.id" class="magacin-item">
+          {{ magacin?.naziv }}
+        </mat-list-option>
+      </mat-selection-list>
+    </div> -->
+
+    <div class="magacini-container">
+      <mat-error *ngIf="selectedMagacini.length === 0" class="error-message">
+        Niste izabrali magacin 
+      </mat-error>
+      <mat-checkbox *ngFor="let magacin of magaciniList; let i = index" [value]="magacin?.id" class="magacin-item"
+        (change)="onSelectionChange($event.checked, magacin?.id)">
+        {{ magacin?.naziv }}
+      </mat-checkbox>
+      
+    </div>
+    
+    
+    
+
+    <div class="button-container">
+      <button mat-raised-button type="submit" [disabled]="zaposleniForm.invalid || selectedMagacini.length === 0" class="add-button">Dodaj</button>
+      <button mat-raised-button type="button" class="cancel-button" (click)="closeDialog()">Odustani</button>
+    </div>
+  </form>
+</mat-dialog-content>
+
+
+<div class="toast-container">
+  <div *ngIf="successMessage" class="toast-item success">
+    <span class="toast-message">{{ successMessage }}</span>
+    <span class="toast-close-button" (click)="clearToastr()">&times;</span>
+  </div>
+  <div *ngIf="errorMessage" class="toast-item error">
+    <span class="toast-message">{{ errorMessage }}</span>
+    <span class="toast-close-button" (click)="clearToastr()">&times;</span>
+  </div>

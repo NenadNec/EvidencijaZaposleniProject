@@ -1,0 +1,16 @@
+<form (ngSubmit)="submitForm()">
+    <div>
+      <label for="ime">Ime:</label>
+      <input type="text" id="ime" [(ngModel)]="noviKorisnik.ime" name="ime" required>
+    </div>
+    <div>
+      <label for="user">Korisničko ime:</label>
+      <input type="text" id="user" [(ngModel)]="noviKorisnik.user" name="user" required>
+    </div>
+    <div>
+      <label for="password">Lozinka:</label>
+      <input type="password" id="password" [(ngModel)]="noviKorisnik.password" name="password" required>
+    </div>
+    <button type="submit">Registracija</button>
+  </form>
+  

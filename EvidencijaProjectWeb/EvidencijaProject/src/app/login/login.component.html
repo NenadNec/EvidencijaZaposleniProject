@@ -1,0 +1,32 @@
+<div class="login-container">
+  <form class="login-form" [formGroup]="loginForm" (ngSubmit)="submitForm()">
+    <div>
+      <label for="username">Korisničko ime:</label>
+      <input type="text" id="username" formControlName="username" required>
+      <div *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].invalid" class="error-message">
+        Korisničko ime je obavezno.
+      </div>
+    </div>
+    <div>
+      <label for="password">Lozinka:</label>
+      <input type="password" id="password" formControlName="password" required>
+      <div *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid" class="error-message">
+        Lozinka je obavezna.
+      </div>
+    </div>
+    <button type="submit" class="prijava">Prijavi se</button>
+    <button type="button" class="registracija" (click)="navigateToRegistration()">Registruj se</button>
+  </form>
+
+  <div class="toast-container">
+    <div *ngIf="successMessage" class="toast-item success">
+      <span class="toast-message">{{ successMessage }}</span>
+      <span class="toast-close-button" (click)="clearToastr()">&times;</span>
+    </div>
+    <div *ngIf="errorMessage" class="toast-item error">
+      <span class="toast-message">{{ errorMessage }}</span>
+      <span class="toast-close-button" (click)="clearToastr()">&times;</span>
+    </div>
+  </div>
+  
+</div>
